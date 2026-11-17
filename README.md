@@ -32,3 +32,10 @@ Whitespace between two adjacent encoded-words is not significant and is
 removed, while whitespace between an encoded-word and plain text is kept.
 That rule is easy to get wrong when you write your own scanner, and it is
 the behaviour this library tests explicitly.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
